@@ -21,6 +21,8 @@ class GhprbTriggerContext implements Context {
     boolean autoCloseFailedPullRequests;
     boolean allowMembersOfWhitelistedOrgsAsAdmin;
     boolean displayBuildErrorsOnDownstreamBuilds;
+    String includedRegions;
+    String excludedRegions;
     GhprbExtensionContext extensionContext = new GhprbExtensionContext();
 
     /**

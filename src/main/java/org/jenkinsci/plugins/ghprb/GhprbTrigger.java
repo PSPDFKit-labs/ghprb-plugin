@@ -83,7 +83,8 @@ public class GhprbTrigger extends GhprbTriggerBackwardsCompatible {
     private String gitHubAuthId;
     private String triggerPhrase;
     private String skipBuildPhrase;
-    
+    private String includedRegions;
+    private String excludedRegions;
 
     private transient Ghprb helper;
     private transient GhprbRepository repository;
@@ -137,7 +138,9 @@ public class GhprbTrigger extends GhprbTriggerBackwardsCompatible {
             String commitStatusContext,
             String gitHubAuthId,
             String buildDescTemplate,
-            List<GhprbExtension> extensions
+            List<GhprbExtension> extensions,
+            String includedRegions,
+            String excludedRegions
             ) throws ANTLRException {
         super(cron);
         this.adminlist = adminlist;
@@ -155,6 +158,8 @@ public class GhprbTrigger extends GhprbTriggerBackwardsCompatible {
         this.gitHubAuthId = gitHubAuthId;
         this.allowMembersOfWhitelistedOrgsAsAdmin = allowMembersOfWhitelistedOrgsAsAdmin;
         this.buildDescTemplate = buildDescTemplate;
+        this.includedRegions = includedRegions;
+        this.excludedRegions = excludedRegions;
         setExtensions(extensions);
         configVersion = latestVersion;
     }
@@ -522,6 +527,20 @@ public class GhprbTrigger extends GhprbTriggerBackwardsCompatible {
             return new ArrayList<GhprbBranch>();
         }
         return whiteListTargetBranches;
+    }
+
+    public String getIncludedRegions() {
+        if (includedRegions == null) {
+            return "";
+        }
+        return includedRegions;
+    }
+
+    public String getExcludedRegions() {
+        if (excludedRegions == null) {
+            return "";
+        }
+        return excludedRegions;
     }
 
     @Override
